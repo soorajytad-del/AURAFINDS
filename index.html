@@ -183,6 +183,7 @@
           <!-- Left: Image Gallery Showcase -->
           <div class="detail-gallery-card glass">
             <div class="badge-tag" id="detail-badge">Featured</div>
+            <div class="detail-code-tag" id="detail-code-badge">ID: 1004</div>
             <div class="detail-image-wrapper">
               <img id="detail-main-image" src="" alt="Product Image">
             </div>
@@ -383,6 +384,36 @@
       </div>
     </div>
   </footer>
+
+  <!-- Deal of the Day Popup Modal (10s entry delay) -->
+  <div class="deal-popup-overlay" id="deal-popup-overlay" style="display: none;">
+    <div class="deal-popup-card glass animate-zoom-in">
+      <button class="deal-popup-close-btn" id="close-deal-popup" aria-label="Close Deal of the Day">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="deal-popup-badge"><i data-lucide="sparkles"></i> Deal of the Day</div>
+      <div class="deal-popup-content">
+        <div class="deal-popup-image-box">
+          <img src="" alt="Deal of the Day Image" id="deal-popup-img">
+        </div>
+        <div class="deal-popup-info">
+          <span class="deal-popup-tag">EXCLUSIVE PRICE</span>
+          <h3 id="deal-popup-title">Product Title</h3>
+          <p id="deal-popup-tagline">Tagline details...</p>
+          <div class="deal-popup-price-row">
+            <span class="deal-popup-discount-price" id="deal-popup-price">₹0</span>
+            <span class="deal-popup-original-price" id="deal-popup-old-price">₹0</span>
+            <span class="deal-popup-savings-badge" id="deal-popup-savings">-0% OFF</span>
+          </div>
+          <div class="deal-popup-actions">
+            <a href="" class="btn btn-primary" id="deal-popup-link">
+              View Deal <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="products.js"></script>

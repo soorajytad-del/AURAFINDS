@@ -2317,3 +2317,206 @@ svg.lucide {
   border-color: #ffffff;
   box-shadow: 0 0 0 2px var(--accent-color);
 }
+
+/* ==========================================================================
+   DEAL OF THE DAY POPUP MODAL STYLES
+   ========================================================================== */
+.deal-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(4, 4, 8, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 24px;
+  animation: fadeIn var(--transition-fast) forwards;
+}
+.deal-popup-card {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.3), var(--card-shadow);
+  overflow: hidden;
+}
+.deal-popup-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.deal-popup-close-btn:hover {
+  color: var(--text-primary);
+  transform: scale(1.1) rotate(90deg);
+}
+.deal-popup-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--discount-color);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);
+}
+.deal-popup-content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 30px;
+  align-items: center;
+}
+.deal-popup-image-box {
+  width: 100%;
+  height: 240px;
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+}
+.deal-popup-image-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+}
+.deal-popup-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.deal-popup-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-light);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.deal-popup-info h3 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.deal-popup-info p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.deal-popup-price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.deal-popup-discount-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--price-color);
+}
+.deal-popup-original-price {
+  font-size: 1.1rem;
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+.deal-popup-savings-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--price-color);
+  background-color: var(--price-bg);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+.deal-popup-actions {
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-zoom-in {
+  animation: zoomIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive Popup */
+@media (max-width: 600px) {
+  .deal-popup-card {
+    padding: 24px;
+  }
+  .deal-popup-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .deal-popup-image-box {
+    height: 180px;
+  }
+  .deal-popup-info h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Product Code Badges (ID near picture) */
+.card-code-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  z-index: 5;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
+}
+.detail-code-tag {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  z-index: 5;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
+}
+

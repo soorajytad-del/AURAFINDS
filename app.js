@@ -7,6 +7,13 @@
 let localProducts = JSON.parse(localStorage.getItem("aurafinds_products")) || [];
 const dummyIds = ["aurasound-max", "novalight-beam", "ergodesk-flow", "chronos-fit", "keyquest-pro", "hydrostream-go"];
 
+// Auto-purge cache if legacy string IDs exist to synchronize new 4-digit IDs
+if (localProducts.some(p => p.id === "iqoo-z11x" || p.id === "lenovo-ideapad-slim3")) {
+  localStorage.removeItem("aurafinds_products");
+  localStorage.removeItem("aurafinds_deal_of_the_day");
+  localProducts = [];
+}
+
 // Clean-slate override: if static products list is explicitly empty, wipe everything
 if (window.products && window.products.length === 0) {
   localStorage.removeItem("aurafinds_products");
@@ -51,17 +58,9 @@ const activeLocalIds = localProducts.map(p => p.id);
   }
 });
 
-// 3. Validate and clean active Deal of the Day
-const activeDealId = localStorage.getItem("aurafinds_deal_of_the_day");
-if (activeDealId && !localProducts.some(p => p.id === activeDealId)) {
-  if (localProducts.length > 0) {
-    localStorage.setItem("aurafinds_deal_of_the_day", localProducts[0].id);
-  } else {
-    localStorage.removeItem("aurafinds_deal_of_the_day");
-  }
-} else if (!activeDealId && localProducts.length > 0) {
-  localStorage.setItem("aurafinds_deal_of_the_day", localProducts[0].id);
-}
+// 3. Validate and clean active Deal of the Day (Hardcode Lenovo Laptop '1004' as default)
+localStorage.setItem("aurafinds_deal_of_the_day", "1004");
+const activeDealId = "1004";
 
 // 4. Save the synced state back to localStorage
 localStorage.setItem("aurafinds_products", JSON.stringify(localProducts));
@@ -106,6 +105,17 @@ const dom = {
   privacyPolicyView: document.getElementById("privacy-policy-view"),
   privacyBackBtn: document.getElementById("privacy-back-btn"),
   
+  // Deal of the Day Popup elements
+  dealPopupOverlay: document.getElementById("deal-popup-overlay"),
+  closeDealPopup: document.getElementById("close-deal-popup"),
+  dealPopupImg: document.getElementById("deal-popup-img"),
+  dealPopupTitle: document.getElementById("deal-popup-title"),
+  dealPopupTagline: document.getElementById("deal-popup-tagline"),
+  dealPopupPrice: document.getElementById("deal-popup-price"),
+  dealPopupOldPrice: document.getElementById("deal-popup-old-price"),
+  dealPopupSavings: document.getElementById("deal-popup-savings"),
+  dealPopupLink: document.getElementById("deal-popup-link"),
+  
   // Wishlist Elements
   wishlistBtn: document.getElementById("wishlist-btn"),
   wishlistCount: document.getElementById("wishlist-count"),
@@ -144,6 +154,7 @@ const dom = {
 function init() {
   applyTheme(state.theme);
   updateHeroDeal();
+  initDealPopup();
   updateWishlistUI();
   setupEventListeners();
   handleRouting(); // Parse initial URL hash
@@ -155,7 +166,7 @@ function init() {
 }
 
 function updateHeroDeal() {
-  const dealId = localStorage.getItem("aurafinds_deal_of_the_day") || "aurasound-max";
+  const dealId = localStorage.getItem("aurafinds_deal_of_the_day") || "1004";
   const dealProduct = state.products.find(p => p.id === dealId);
   const heroVisual = document.querySelector(".hero-visual");
   const heroContainer = document.querySelector(".hero-container");
@@ -188,9 +199,72 @@ function updateHeroDeal() {
     
     if (dealLink) dealLink.href = `#product/${dealProduct.id}`;
   } else {
-    // If no products are present, or active deal is not found, hide the deal visual block
     if (heroVisual) heroVisual.style.display = "none";
     if (heroContainer) heroContainer.style.gridTemplateColumns = "1fr";
+  }
+}
+
+function initDealPopup() {
+  const dealId = localStorage.getItem("aurafinds_deal_of_the_day") || "1004";
+  const dealProduct = state.products.find(p => p.id === dealId);
+  
+  if (dealProduct && dom.dealPopupOverlay) {
+    // Populate Popup elements
+    if (dom.dealPopupImg) {
+      dom.dealPopupImg.src = dealProduct.image;
+      dom.dealPopupImg.alt = dealProduct.title;
+    }
+    if (dom.dealPopupTitle) dom.dealPopupTitle.textContent = dealProduct.title;
+    if (dom.dealPopupTagline) dom.dealPopupTagline.textContent = dealProduct.tagline;
+    if (dom.dealPopupPrice) dom.dealPopupPrice.textContent = `₹${dealProduct.price.toLocaleString('en-IN')}`;
+    
+    if (dom.dealPopupOldPrice) {
+      if (dealProduct.originalPrice) {
+        dom.dealPopupOldPrice.textContent = `₹${dealProduct.originalPrice.toLocaleString('en-IN')}`;
+        dom.dealPopupOldPrice.style.display = "inline";
+        
+        // Calculate savings
+        const savings = Math.round(((dealProduct.originalPrice - dealProduct.price) / dealProduct.originalPrice) * 100);
+        if (dom.dealPopupSavings) {
+          dom.dealPopupSavings.textContent = `-${savings}% OFF`;
+          dom.dealPopupSavings.style.display = "inline-block";
+        }
+      } else {
+        dom.dealPopupOldPrice.style.display = "none";
+        if (dom.dealPopupSavings) dom.dealPopupSavings.style.display = "none";
+      }
+    }
+    
+    if (dom.dealPopupLink) {
+      dom.dealPopupLink.href = `#product/${dealProduct.id}`;
+      // When the link is clicked, close the popup
+      dom.dealPopupLink.addEventListener("click", () => {
+        dom.dealPopupOverlay.style.display = "none";
+      });
+    }
+    
+    // Close button listener
+    if (dom.closeDealPopup) {
+      dom.closeDealPopup.addEventListener("click", () => {
+        dom.dealPopupOverlay.style.display = "none";
+      });
+    }
+    
+    // Click outside overlay to close
+    dom.dealPopupOverlay.addEventListener("click", (e) => {
+      if (e.target === dom.dealPopupOverlay) {
+        dom.dealPopupOverlay.style.display = "none";
+      }
+    });
+
+    // Trigger Popup after 10 seconds (10000 ms)
+    setTimeout(() => {
+      // Only show if the user hasn't already navigated to a specific product or admin view, to preserve UX
+      const currentHash = window.location.hash;
+      if (!currentHash.startsWith("#product/") && currentHash !== "#privacy") {
+        dom.dealPopupOverlay.style.display = "flex";
+      }
+    }, 10000);
   }
 }
 
@@ -271,9 +345,14 @@ function showProductDetailsPage(product) {
   dom.detailReviewCount.textContent = `(${product.reviewCount.toLocaleString()} reviews)`;
   dom.detailStars.innerHTML = generateStarsHTML(product.rating);
   
-  // Image
+  // Image & Product Code
   dom.detailMainImage.src = product.image;
   dom.detailMainImage.alt = product.title;
+  
+  const detailCodeBadge = document.getElementById("detail-code-badge");
+  if (detailCodeBadge) {
+    detailCodeBadge.textContent = `ID: ${product.id}`;
+  }
   
   // Colors Selector
   if (product.colors && product.colors.length > 0) {
@@ -498,6 +577,7 @@ function renderGrid(productsList) {
       <article class="product-card" style="animation-delay: ${index * 0.05}s">
         <!-- Image Box -->
         <div class="card-image-box">
+          <span class="card-code-badge">ID: ${product.id}</span>
           <span class="card-category-badge">${product.category}</span>
           <button class="wishlist-toggle ${isWishlisted ? "active" : ""}" 
                   onclick="event.stopPropagation(); toggleWishlistItem('${product.id}')" 

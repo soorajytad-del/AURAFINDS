@@ -7,6 +7,13 @@
 let localProducts = JSON.parse(localStorage.getItem("aurafinds_products")) || [];
 const dummyIds = ["aurasound-max", "novalight-beam", "ergodesk-flow", "chronos-fit", "keyquest-pro", "hydrostream-go"];
 
+// Auto-purge cache if legacy string IDs exist to synchronize new 4-digit IDs
+if (localProducts.some(p => p.id === "iqoo-z11x" || p.id === "lenovo-ideapad-slim3")) {
+  localStorage.removeItem("aurafinds_products");
+  localStorage.removeItem("aurafinds_deal_of_the_day");
+  localProducts = [];
+}
+
 // Clean-slate override: if static products list is explicitly empty, wipe everything
 if (window.products && window.products.length === 0) {
   localStorage.removeItem("aurafinds_products");
@@ -31,17 +38,9 @@ const activeLocalIds = localProducts.map(p => p.id);
   }
 });
 
-// 3. Validate and clean active Deal of the Day
-const activeDealId = localStorage.getItem("aurafinds_deal_of_the_day");
-if (activeDealId && !localProducts.some(p => p.id === activeDealId)) {
-  if (localProducts.length > 0) {
-    localStorage.setItem("aurafinds_deal_of_the_day", localProducts[0].id);
-  } else {
-    localStorage.removeItem("aurafinds_deal_of_the_day");
-  }
-} else if (!activeDealId && localProducts.length > 0) {
-  localStorage.setItem("aurafinds_deal_of_the_day", localProducts[0].id);
-}
+// 3. Validate and clean active Deal of the Day (Force Lenovo Laptop '1004' as default)
+localStorage.setItem("aurafinds_deal_of_the_day", "1004");
+const activeDealId = "1004";
 
 // 4. Save the synced state back to localStorage
 localStorage.setItem("aurafinds_products", JSON.stringify(localProducts));
@@ -309,7 +308,7 @@ function renderTable() {
     return;
   }
 
-  const dealOfTheDayId = localStorage.getItem("aurafinds_deal_of_the_day") || "aurasound-max";
+  const dealOfTheDayId = localStorage.getItem("aurafinds_deal_of_the_day") || "1004";
 
   dom.adminTableBody.innerHTML = filtered.map(product => `
     <tr>
@@ -408,7 +407,7 @@ window.openEditModal = function(productId) {
     .join("\n");
     
   // Deal of the day state
-  const dealOfTheDayId = localStorage.getItem("aurafinds_deal_of_the_day") || "aurasound-max";
+  const dealOfTheDayId = localStorage.getItem("aurafinds_deal_of_the_day") || "1004";
   dom.formDealOfTheDay.checked = dealOfTheDayId === productId;
   
   // Variants
@@ -522,7 +521,7 @@ function handleFormSubmit(e) {
   if (dom.formDealOfTheDay.checked) {
     localStorage.setItem("aurafinds_deal_of_the_day", productID);
   } else if (localStorage.getItem("aurafinds_deal_of_the_day") === productID) {
-    localStorage.setItem("aurafinds_deal_of_the_day", "aurasound-max");
+    localStorage.setItem("aurafinds_deal_of_the_day", "1004");
   }
 
   // Save State

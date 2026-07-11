@@ -1,6 +1,6 @@
 const products = [
   {
-    id: "iqoo-z11x",
+    id: "1001",
     title: "iQOO Z11x 5G",
     tagline: "7200mAh Massive Battery & Dimensity 7400 Turbo",
     category: "Productivity",
@@ -41,7 +41,7 @@ const products = [
     ]
   },
   {
-    id: "iqoo-neo10",
+    id: "1002",
     title: "iQOO Neo 10 5G",
     tagline: "India's Slimmest 7000mAh Battery Smartphone with Snapdragon 8s Gen 4",
     category: "Productivity",
@@ -81,7 +81,7 @@ const products = [
     ]
   },
   {
-    id: "iqoo-15r",
+    id: "1003",
     title: "iQOO 15R 5G",
     tagline: "Snapdragon 8 Gen 5 · 7600mAh · 144Hz AMOLED · India's Slimmest Flagship",
     category: "Productivity",
@@ -123,7 +123,7 @@ const products = [
     ]
   },
   {
-    id: "lenovo-ideapad-slim3",
+    id: "1004",
     title: "Lenovo IdeaPad Slim 3 15",
     tagline: "13th Gen Intel Core i3 · 15.6\" FHD Anti-Glare · 1.6kg Ultra Thin & Light",
     category: "Productivity",
