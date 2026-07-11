@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover premium, handpicked Amazon products across audio, productivity, fitness, and smart home. Read detailed specs, reviews, and find direct Amazon deals.">
+  <meta name="keywords" content="Amazon deals, tech gadgets, mechanical keyboards, ergonomic desks, smart projectors, wireless headphones">
+  <title>AuraFinds | Premium Curated Amazon Products & Smart Gadgets</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="container header-container">
+      <a href="#" class="logo" id="logo-link">
+        <span class="logo-accent">Aura</span>Finds
+      </a>
+      
+      <!-- Desktop Search Bar -->
+      <div class="search-wrapper header-search">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" id="search-input" placeholder="Search premium deals..." aria-label="Search products">
+        <button id="clear-search" class="clear-btn" aria-label="Clear search" style="display: none;">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <!-- Navigation Actions -->
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme Mode">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+
+        <!-- Wishlist Button -->
+        <button id="wishlist-btn" class="icon-btn wishlist-trigger" aria-label="View Wishlist" title="View Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge" id="wishlist-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Search Bar (Sticky under header on mobile) -->
+  <div class="mobile-search-bar">
+    <div class="search-wrapper">
+      <i data-lucide="search" class="search-icon"></i>
+      <input type="text" id="mobile-search-input" placeholder="Search products..." aria-label="Search products">
+      <button id="mobile-clear-search" class="clear-btn" aria-label="Clear search" style="display: none;">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- Hero Showcase Section -->
+    <section class="hero-section" id="hero-banner">
+      <div class="hero-bg-gradient"></div>
+      <div class="container hero-container">
+        <div class="hero-content">
+          <span class="hero-tag">HANDPICKED DEALS</span>
+          <h1>Upgrade Your Lifestyle With Premium Gadgets</h1>
+          <p>We research, review, and curate only the highest-rated Amazon products. Save time, compare specifications, and buy directly with confidence.</p>
+          <div class="hero-cta">
+            <a href="#products-showcase" class="btn btn-primary btn-lg">
+              Explore Products <i data-lucide="arrow-right"></i>
+            </a>
+            <div class="hero-metrics">
+              <div class="metric">
+                <span class="metric-num">100%</span>
+                <span class="metric-label">Vetted Quality</span>
+              </div>
+              <div class="metric">
+                <span class="metric-num">600+</span>
+                <span class="metric-label">Reviews Analyzed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="floating-card glass">
+            <div class="floating-badge"><i data-lucide="sparkles"></i> Deal of the Day</div>
+            <img src="assets/images/aurasound_max.png" alt="Featured AuraSound Max Headphones" id="hero-featured-img">
+            <div class="floating-details">
+              <h4>AuraSound Max ANC</h4>
+              <div class="price-row">
+                <span class="discount-price">$349.99</span>
+                <span class="original-price">$399.99</span>
+              </div>
+              <a href="#product/aurasound-max" class="btn btn-sm btn-outline-white">View Deal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Showcase Container -->
+    <section class="showcase-section container" id="products-showcase">
+      <div class="showcase-header">
+        <div class="section-title-area">
+          <h2 class="section-title">Curated Selection</h2>
+          <p class="section-subtitle">Filter by category to find the perfect gear for your setup</p>
+        </div>
+        
+        <!-- Sorting Control -->
+        <div class="sort-wrapper">
+          <label for="sort-select"><i data-lucide="sliders-horizontal"></i> Sort By</label>
+          <select id="sort-select" aria-label="Sort products">
+            <option value="popular">Popularity</option>
+            <option value="rating">Highest Rated</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Categories Navigation -->
+      <div class="categories-bar">
+        <button class="category-chip active" data-category="all">
+          <i data-lucide="grid"></i> All Products
+        </button>
+        <button class="category-chip" data-category="Audio">
+          <i data-lucide="headphones"></i> Audio
+        </button>
+        <button class="category-chip" data-category="Productivity">
+          <i data-lucide="laptop"></i> Productivity
+        </button>
+        <button class="category-chip" data-category="Fitness">
+          <i data-lucide="activity"></i> Fitness
+        </button>
+        <button class="category-chip" data-category="Smart Home">
+          <i data-lucide="home"></i> Smart Home
+        </button>
+      </div>
+
+      <!-- Active Filters indicator / Results message -->
+      <div id="results-meta" class="results-meta" style="display: none;">
+        <span id="results-count-text">Showing 6 products</span>
+        <button id="reset-filters-btn" class="text-btn">Reset filters</button>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="products-grid" id="products-grid">
+        <!-- Rendered dynamically via JavaScript -->
+        <div class="grid-loader">
+          <div class="spinner"></div>
+          <p>Curating deals...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Product View (SPA Page Section - default hidden) -->
+    <section class="product-detail-view" id="product-detail-view" style="display: none;">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="#">Products</a>
+          <span class="divider">/</span>
+          <span id="breadcrumb-category">Category</span>
+          <span class="divider">/</span>
+          <span id="breadcrumb-title" class="active">Product Title</span>
+        </nav>
+
+        <button class="back-link-btn" id="detail-back-btn">
+          <i data-lucide="arrow-left"></i> Back to Catalog
+        </button>
+
+        <div class="detail-layout">
+          <!-- Left: Image Gallery Showcase -->
+          <div class="detail-gallery-card glass">
+            <div class="badge-tag" id="detail-badge">Featured</div>
+            <div class="detail-image-wrapper">
+              <img id="detail-main-image" src="" alt="Product Image">
+            </div>
+          </div>
+
+          <!-- Right: Detailed Content and Buying Actions -->
+          <div class="detail-info-card">
+            <span class="detail-category" id="detail-category-label">Category</span>
+            <h1 class="detail-title" id="detail-product-title">Product Title</h1>
+            <p class="detail-tagline" id="detail-product-tagline">Product Tagline</p>
+
+            <!-- Rating Summary -->
+            <div class="detail-rating-row">
+              <div class="rating-stars" id="detail-stars">
+                <!-- Stars rendered via JS -->
+              </div>
+              <span class="rating-score" id="detail-rating-score">4.8</span>
+              <span class="rating-count" id="detail-review-count">(1,248 reviews)</span>
+            </div>
+
+            <!-- Price & Amazon Buying Actions -->
+            <div class="detail-purchase-box glass">
+              <div class="price-section">
+                <span class="current-price" id="detail-price">$349.99</span>
+                <span class="old-price" id="detail-original-price">$399.99</span>
+                <span class="discount-badge" id="detail-discount-percent">-15%</span>
+              </div>
+              
+              <div class="actions-group">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-buy-now" id="detail-amazon-link">
+                  Buy on Amazon <i data-lucide="external-link"></i>
+                </a>
+                <button class="btn btn-outline btn-lg wishlist-toggle-btn" id="detail-wishlist-btn">
+                  <i data-lucide="heart" class="heart-icon"></i> <span class="wishlist-btn-text">Add to Wishlist</span>
+                </button>
+              </div>
+
+              <div class="shipping-info">
+                <p><i data-lucide="truck"></i> Prime eligible: Free Shipping & Returns</p>
+                <p><i data-lucide="shield-check"></i> 100% Secure Transaction via Amazon Payments</p>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="detail-section">
+              <h3>Description</h3>
+              <p class="detail-desc" id="detail-description">Extended product description goes here...</p>
+            </div>
+
+            <!-- Key Features -->
+            <div class="detail-section">
+              <h3>Key Features</h3>
+              <ul class="features-list" id="detail-features">
+                <!-- Features list rendered via JS -->
+              </ul>
+            </div>
+
+            <!-- Technical Specifications Table -->
+            <div class="detail-section">
+              <h3>Specifications</h3>
+              <div class="specs-table-wrapper">
+                <table class="specs-table">
+                  <tbody id="detail-specs-body">
+                    <!-- Specs rows rendered via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Affiliate Disclaimer inside Product Info -->
+            <div class="product-disclosure-alert">
+              <i data-lucide="info"></i>
+              <p>Buying through our links helps support our independent reviews. As an Amazon Associate, we earn a small commission from qualifying purchases at no extra cost to you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sliding Wishlist Drawer -->
+  <div class="wishlist-overlay" id="wishlist-overlay">
+    <div class="wishlist-drawer glass" aria-dialog="true" aria-labelledby="wishlist-drawer-title">
+      <div class="drawer-header">
+        <h3 id="wishlist-drawer-title"><i data-lucide="heart" class="heart-icon-filled"></i> Your Wishlist</h3>
+        <button id="close-wishlist" class="icon-btn" aria-label="Close Wishlist">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="drawer-content" id="wishlist-drawer-content">
+        <!-- Rendered dynamically via JS -->
+        <div class="empty-wishlist">
+          <i data-lucide="shopping-bag" class="empty-icon"></i>
+          <p>Your wishlist is empty</p>
+          <button class="btn btn-sm btn-outline-primary close-wishlist-trigger">Start Browsing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="logo-accent">Aura</span>Finds</a>
+        <p>Your premier directory for high-quality, top-rated products on Amazon. We filter the noise so you only get the best.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#">Catalog</a></li>
+          <li><a href="#products-showcase">Featured Deals</a></li>
+          <li><a href="#" class="wishlist-trigger">Wishlist</a></li>
+        </ul>
+      </div>
+      <div class="footer-compliance">
+        <h4>Disclaimer</h4>
+        <p class="disclosure-statement">
+          AuraFinds is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-container">
+        <p>&copy; 2026 AuraFinds. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
