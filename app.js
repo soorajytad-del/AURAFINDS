@@ -3,9 +3,72 @@
  * Handles routing, filtering, search, sorting, wishlist, and theme toggling.
  */
 
+// Synchronize localStorage with static products.js database
+let localProducts = JSON.parse(localStorage.getItem("aurafinds_products")) || [];
+const dummyIds = ["aurasound-max", "novalight-beam", "ergodesk-flow", "chronos-fit", "keyquest-pro", "hydrostream-go"];
+
+// Clean-slate override: if static products list is explicitly empty, wipe everything
+if (window.products && window.products.length === 0) {
+  localStorage.removeItem("aurafinds_products");
+  localStorage.removeItem("aurafinds_deal_of_the_day");
+  localProducts = [];
+}
+
+// 1. Remove dummy products if they are no longer present in window.products
+const activeStaticIds = (window.products || []).map(p => p.id);
+localProducts = localProducts.filter(p => {
+  if (dummyIds.includes(p.id) && !activeStaticIds.includes(p.id)) {
+    return false;
+  }
+  return true;
+});
+
+// 2. Add new products from window.products if they don't exist in localProducts
+const activeLocalIds = localProducts.map(p => p.id);
+(window.products || []).forEach(p => {
+  if (!activeLocalIds.includes(p.id)) {
+    localProducts.push(p);
+  }
+});
+
+// 2b. Always sync image, variants, colors, price & key fields from products.js
+//     so edits to the source file are reflected without clearing cache manually
+(window.products || []).forEach(staticProduct => {
+  const idx = localProducts.findIndex(p => p.id === staticProduct.id);
+  if (idx !== -1) {
+    const cached = localProducts[idx];
+    localProducts[idx] = {
+      ...cached,                          // keep admin edits (title, description etc.)
+      image:         staticProduct.image,
+      price:         staticProduct.price,
+      originalPrice: staticProduct.originalPrice,
+      amazonUrl:     staticProduct.amazonUrl,
+      variants:      staticProduct.variants,
+      colors:        staticProduct.colors,
+      features:      staticProduct.features,
+      specifications: staticProduct.specifications
+    };
+  }
+});
+
+// 3. Validate and clean active Deal of the Day
+const activeDealId = localStorage.getItem("aurafinds_deal_of_the_day");
+if (activeDealId && !localProducts.some(p => p.id === activeDealId)) {
+  if (localProducts.length > 0) {
+    localStorage.setItem("aurafinds_deal_of_the_day", localProducts[0].id);
+  } else {
+    localStorage.removeItem("aurafinds_deal_of_the_day");
+  }
+} else if (!activeDealId && localProducts.length > 0) {
+  localStorage.setItem("aurafinds_deal_of_the_day", localProducts[0].id);
+}
+
+// 4. Save the synced state back to localStorage
+localStorage.setItem("aurafinds_products", JSON.stringify(localProducts));
+
 // Application State
 const state = {
-  products: window.products || [],
+  products: localProducts,
   filters: {
     category: "all",
     search: "",
@@ -40,6 +103,8 @@ const dom = {
   productsShowcase: document.getElementById("products-showcase"),
   productsGrid: document.getElementById("products-grid"),
   productDetailView: document.getElementById("product-detail-view"),
+  privacyPolicyView: document.getElementById("privacy-policy-view"),
+  privacyBackBtn: document.getElementById("privacy-back-btn"),
   
   // Wishlist Elements
   wishlistBtn: document.getElementById("wishlist-btn"),
@@ -64,6 +129,10 @@ const dom = {
   detailDiscountPercent: document.getElementById("detail-discount-percent"),
   detailAmazonLink: document.getElementById("detail-amazon-link"),
   detailWishlistBtn: document.getElementById("detail-wishlist-btn"),
+  detailVariantsContainer: document.getElementById("detail-variants-container"),
+  detailVariantsList: document.getElementById("detail-variants-list"),
+  detailColorsContainer: document.getElementById("detail-colors-container"),
+  detailColorsList: document.getElementById("detail-colors-list"),
   detailDescription: document.getElementById("detail-description"),
   detailFeatures: document.getElementById("detail-features"),
   detailSpecsBody: document.getElementById("detail-specs-body")
@@ -74,6 +143,7 @@ const dom = {
    ========================================================================== */
 function init() {
   applyTheme(state.theme);
+  updateHeroDeal();
   updateWishlistUI();
   setupEventListeners();
   handleRouting(); // Parse initial URL hash
@@ -84,13 +154,56 @@ function init() {
   }
 }
 
+function updateHeroDeal() {
+  const dealId = localStorage.getItem("aurafinds_deal_of_the_day") || "aurasound-max";
+  const dealProduct = state.products.find(p => p.id === dealId);
+  const heroVisual = document.querySelector(".hero-visual");
+  const heroContainer = document.querySelector(".hero-container");
+  
+  if (dealProduct) {
+    if (heroVisual) heroVisual.style.display = "flex";
+    if (heroContainer) heroContainer.style.gridTemplateColumns = "1.2fr 0.8fr";
+    
+    const featuredImg = document.getElementById("hero-featured-img");
+    const dealTitle = document.getElementById("hero-deal-title");
+    const dealPrice = document.getElementById("hero-deal-price");
+    const dealOldPrice = document.getElementById("hero-deal-old-price");
+    const dealLink = document.getElementById("hero-deal-link");
+    
+    if (featuredImg) {
+      featuredImg.src = dealProduct.image;
+      featuredImg.alt = dealProduct.title;
+    }
+    if (dealTitle) dealTitle.textContent = dealProduct.title;
+    if (dealPrice) dealPrice.textContent = `₹${dealProduct.price.toLocaleString('en-IN')}`;
+    
+    if (dealOldPrice) {
+      if (dealProduct.originalPrice) {
+        dealOldPrice.textContent = `₹${dealProduct.originalPrice.toLocaleString('en-IN')}`;
+        dealOldPrice.style.display = "inline";
+      } else {
+        dealOldPrice.style.display = "none";
+      }
+    }
+    
+    if (dealLink) dealLink.href = `#product/${dealProduct.id}`;
+  } else {
+    // If no products are present, or active deal is not found, hide the deal visual block
+    if (heroVisual) heroVisual.style.display = "none";
+    if (heroContainer) heroContainer.style.gridTemplateColumns = "1fr";
+  }
+}
+
 /* ==========================================================================
    ROUTING ENGINE (SPA DESIGN)
    ========================================================================== */
 function handleRouting() {
   const hash = window.location.hash;
   
-  if (hash.startsWith("#product/")) {
+  if (hash === "#privacy") {
+    // Privacy Policy Page Route
+    showPrivacyPolicyPage();
+  } else if (hash.startsWith("#product/")) {
     // Detail View Route: #product/aurasound-max
     const productId = hash.replace("#product/", "");
     const product = state.products.find(p => p.id === productId);
@@ -109,17 +222,38 @@ function handleRouting() {
 
 function showCatalogPage() {
   dom.productDetailView.style.display = "none";
+  dom.privacyPolicyView.style.display = "none";
   dom.heroBanner.style.display = "block";
   dom.productsShowcase.style.display = "block";
   
   renderCatalog();
+  
+  const hash = window.location.hash;
+  if (hash === "#products-showcase") {
+    const el = document.getElementById("products-showcase");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+  }
+  
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showPrivacyPolicyPage() {
+  dom.productDetailView.style.display = "none";
+  dom.heroBanner.style.display = "none";
+  dom.productsShowcase.style.display = "none";
+  
+  dom.privacyPolicyView.style.display = "block";
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function showProductDetailsPage(product) {
-  // Hide Home view
+  // Hide Home and Privacy view
   dom.heroBanner.style.display = "none";
   dom.productsShowcase.style.display = "none";
+  dom.privacyPolicyView.style.display = "none";
   
   // Show detail view
   dom.productDetailView.style.display = "block";
@@ -141,21 +275,44 @@ function showProductDetailsPage(product) {
   dom.detailMainImage.src = product.image;
   dom.detailMainImage.alt = product.title;
   
-  // Pricing
-  dom.detailPrice.textContent = `$${product.price.toFixed(2)}`;
-  if (product.originalPrice) {
-    dom.detailOriginalPrice.textContent = `$${product.originalPrice.toFixed(2)}`;
-    dom.detailOriginalPrice.style.display = "inline";
-    const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-    dom.detailDiscountPercent.textContent = `-${discount}%`;
-    dom.detailDiscountPercent.style.display = "inline";
+  // Colors Selector
+  if (product.colors && product.colors.length > 0) {
+    dom.detailColorsContainer.style.display = "block";
+    dom.detailColorsList.innerHTML = product.colors.map((c, idx) => `
+      <div class="color-dot ${idx === 0 ? 'active' : ''}" style="background-color: ${c.hex};" onclick="selectColor(this, ${idx}, '${product.id}')" title="${c.name}"></div>
+    `).join("");
   } else {
-    dom.detailOriginalPrice.style.display = "none";
-    dom.detailDiscountPercent.style.display = "none";
+    dom.detailColorsContainer.style.display = "none";
+    dom.detailColorsList.innerHTML = "";
   }
   
-  // Amazon Link
-  dom.detailAmazonLink.href = product.amazonUrl;
+  // Pricing & Amazon Link (Adaptive to Variants)
+  if (product.variants && product.variants.length > 0) {
+    dom.detailVariantsContainer.style.display = "block";
+    dom.detailVariantsList.innerHTML = product.variants.map((v, idx) => `
+      <button class="variant-btn" onclick="selectVariant(this, ${idx}, '${product.id}')">
+        ${v.name}
+      </button>
+    `).join("");
+    // Initialize with first variant
+    selectVariant(null, 0, product.id);
+  } else {
+    dom.detailVariantsContainer.style.display = "none";
+    dom.detailVariantsList.innerHTML = "";
+    
+    dom.detailPrice.textContent = `₹${product.price.toLocaleString('en-IN')}`;
+    if (product.originalPrice) {
+      dom.detailOriginalPrice.textContent = `₹${product.originalPrice.toLocaleString('en-IN')}`;
+      dom.detailOriginalPrice.style.display = "inline";
+      const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+      dom.detailDiscountPercent.textContent = `-${discount}%`;
+      dom.detailDiscountPercent.style.display = "inline";
+    } else {
+      dom.detailOriginalPrice.style.display = "none";
+      dom.detailDiscountPercent.style.display = "none";
+    }
+    dom.detailAmazonLink.href = product.amazonUrl;
+  }
   
   // Wishlist Action Button
   const isWishlisted = state.wishlist.includes(product.id);
@@ -200,6 +357,70 @@ function showProductDetailsPage(product) {
   }
 }
 
+window.selectVariant = function(btn, idx, productId) {
+  const product = state.products.find(p => p.id === productId);
+  if (!product || !product.variants || !product.variants[idx]) return;
+  
+  const variant = product.variants[idx];
+  
+  const detailPrice = document.getElementById("detail-price");
+  const detailOriginalPrice = document.getElementById("detail-original-price");
+  const detailDiscountPercent = document.getElementById("detail-discount-percent");
+  const detailAmazonLink = document.getElementById("detail-amazon-link");
+  
+  if (detailPrice) detailPrice.textContent = `₹${variant.price.toLocaleString('en-IN')}`;
+  
+  if (detailOriginalPrice && detailDiscountPercent) {
+    if (variant.originalPrice) {
+      detailOriginalPrice.textContent = `₹${variant.originalPrice.toLocaleString('en-IN')}`;
+      detailOriginalPrice.style.display = "inline";
+      const discount = Math.round(((variant.originalPrice - variant.price) / variant.originalPrice) * 100);
+      detailDiscountPercent.textContent = `-${discount}%`;
+      detailDiscountPercent.style.display = "inline";
+    } else {
+      detailOriginalPrice.style.display = "none";
+      detailDiscountPercent.style.display = "none";
+    }
+  }
+  
+  if (detailAmazonLink) detailAmazonLink.href = variant.amazonUrl;
+  
+  // Highlight active button
+  if (btn) {
+    const parent = btn.parentElement;
+    if (parent) {
+      parent.querySelectorAll(".variant-btn").forEach(b => b.classList.remove("active"));
+    }
+    btn.classList.add("active");
+  } else {
+    const list = document.getElementById("detail-variants-list");
+    if (list) {
+      const firstBtn = list.querySelector(".variant-btn");
+      if (firstBtn) firstBtn.classList.add("active");
+    }
+  }
+};
+
+window.selectColor = function(dot, idx, productId) {
+  const product = state.products.find(p => p.id === productId);
+  if (!product || !product.colors || !product.colors[idx]) return;
+  
+  const color = product.colors[idx];
+  
+  const detailMainImage = document.getElementById("detail-main-image");
+  if (detailMainImage) {
+    detailMainImage.src = color.image;
+  }
+  
+  if (dot) {
+    const parent = dot.parentElement;
+    if (parent) {
+      parent.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
+    }
+    dot.classList.add("active");
+  }
+};
+
 /* ==========================================================================
    RENDERING ENGINE (CATALOG & GRID)
    ========================================================================== */
@@ -211,10 +432,10 @@ function renderCatalog() {
     // 2. Search Keyword Filter
     const query = state.filters.search.toLowerCase().trim();
     const matchesSearch = !query || 
-      product.title.toLowerCase().includes(query) ||
-      product.tagline.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query) ||
-      product.features.some(f => f.toLowerCase().includes(query));
+      (product.title && product.title.toLowerCase().includes(query)) ||
+      (product.tagline && product.tagline.toLowerCase().includes(query)) ||
+      (product.category && product.category.toLowerCase().includes(query)) ||
+      (Array.isArray(product.features) && product.features.some(f => f && f.toLowerCase().includes(query)));
       
     return matchesCategory && matchesSearch;
   });
@@ -308,8 +529,8 @@ function renderGrid(productsList) {
           </ul>
 
           <div class="card-price-section">
-            <span class="price">$${product.price.toFixed(2)}</span>
-            ${product.originalPrice ? `<span class="original">$${product.originalPrice.toFixed(2)}</span>` : ""}
+            <span class="price">₹${product.price.toLocaleString('en-IN')}</span>
+            ${product.originalPrice ? `<span class="original">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ""}
             ${discountPercent > 0 ? `<span class="discount">-${discountPercent}%</span>` : ""}
           </div>
 
@@ -399,7 +620,7 @@ function updateWishlistUI() {
         </div>
         <div class="wishlist-item-details">
           <h4><a href="#product/${product.id}" class="wishlist-link-item">${product.title}</a></h4>
-          <span class="price">$${product.price.toFixed(2)}</span>
+          <span class="price">₹${product.price.toLocaleString('en-IN')}</span>
         </div>
         <div class="wishlist-item-actions">
           <button class="wishlist-remove-btn" onclick="toggleWishlistItem('${product.id}')" title="Remove item">
@@ -454,7 +675,13 @@ function setupEventListeners() {
     dom.mobileSearchInput.value = val; // Sync mobile input
     dom.clearSearch.style.display = val ? "block" : "none";
     dom.mobileClearSearch.style.display = val ? "block" : "none";
-    renderCatalog();
+    
+    // Redirect back to catalog showcase if typing search while in a details page
+    if (window.location.hash.startsWith("#product/")) {
+      window.location.hash = "";
+    } else {
+      renderCatalog();
+    }
   });
 
   dom.clearSearch.addEventListener("click", () => {
@@ -473,7 +700,13 @@ function setupEventListeners() {
     dom.searchInput.value = val; // Sync desktop input
     dom.mobileClearSearch.style.display = val ? "block" : "none";
     dom.clearSearch.style.display = val ? "block" : "none";
-    renderCatalog();
+    
+    // Redirect back to catalog showcase if typing search while in a details page
+    if (window.location.hash.startsWith("#product/")) {
+      window.location.hash = "";
+    } else {
+      renderCatalog();
+    }
   });
 
   dom.mobileClearSearch.addEventListener("click", () => {
@@ -527,6 +760,11 @@ function setupEventListeners() {
 
   // Detail View back to catalog action
   dom.detailBackBtn.addEventListener("click", () => {
+    window.location.hash = "";
+  });
+
+  // Privacy Policy back to catalog action
+  dom.privacyBackBtn.addEventListener("click", () => {
     window.location.hash = "";
   });
 }

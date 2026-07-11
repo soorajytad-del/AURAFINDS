@@ -68,6 +68,8 @@
     <!-- Hero Showcase Section -->
     <section class="hero-section" id="hero-banner">
       <div class="hero-bg-gradient"></div>
+      <div class="hero-glow-orb orb-1"></div>
+      <div class="hero-glow-orb orb-2"></div>
       <div class="container hero-container">
         <div class="hero-content">
           <span class="hero-tag">HANDPICKED DEALS</span>
@@ -94,12 +96,12 @@
             <div class="floating-badge"><i data-lucide="sparkles"></i> Deal of the Day</div>
             <img src="assets/images/aurasound_max.png" alt="Featured AuraSound Max Headphones" id="hero-featured-img">
             <div class="floating-details">
-              <h4>AuraSound Max ANC</h4>
+              <h4 id="hero-deal-title">AuraSound Max ANC</h4>
               <div class="price-row">
-                <span class="discount-price">$349.99</span>
-                <span class="original-price">$399.99</span>
+                <span class="discount-price" id="hero-deal-price">₹29,999</span>
+                <span class="original-price" id="hero-deal-old-price">₹34,999</span>
               </div>
-              <a href="#product/aurasound-max" class="btn btn-sm btn-outline-white">View Deal</a>
+              <a href="#product/aurasound-max" class="btn btn-sm btn-outline-white" id="hero-deal-link">View Deal</a>
             </div>
           </div>
         </div>
@@ -184,6 +186,11 @@
             <div class="detail-image-wrapper">
               <img id="detail-main-image" src="" alt="Product Image">
             </div>
+            <!-- Color Selector -->
+            <div id="detail-colors-container" class="detail-colors-section" style="display:none; margin-top: 15px; text-align: center;">
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 8px;">Available Colors</span>
+              <div id="detail-colors-list" style="display: flex; gap: 12px; justify-content: center; align-items: center;"></div>
+            </div>
           </div>
 
           <!-- Right: Detailed Content and Buying Actions -->
@@ -201,11 +208,17 @@
               <span class="rating-count" id="detail-review-count">(1,248 reviews)</span>
             </div>
 
+            <!-- Variant Selector -->
+            <div id="detail-variants-container" class="detail-variants-section" style="display:none; margin-bottom: 20px;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 0.5px;">Select Configuration</span>
+              <div id="detail-variants-list" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+            </div>
+
             <!-- Price & Amazon Buying Actions -->
             <div class="detail-purchase-box glass">
               <div class="price-section">
-                <span class="current-price" id="detail-price">$349.99</span>
-                <span class="old-price" id="detail-original-price">$399.99</span>
+                <span class="current-price" id="detail-price">₹29,999</span>
+                <span class="old-price" id="detail-original-price">₹34,999</span>
                 <span class="discount-badge" id="detail-discount-percent">-15%</span>
               </div>
               
@@ -259,6 +272,60 @@
         </div>
       </div>
     </section>
+
+    <!-- Privacy Policy Page (SPA Section - default hidden) -->
+    <section class="privacy-policy-view" id="privacy-policy-view" style="display: none; padding: 40px 0 80px;">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="#">Home</a>
+          <span class="divider">/</span>
+          <span class="active">Privacy Policy</span>
+        </nav>
+
+        <button class="back-link-btn" id="privacy-back-btn" style="margin-bottom: 30px;">
+          <i data-lucide="arrow-left"></i> Back to Catalog
+        </button>
+
+        <div class="privacy-card glass" style="border-radius: var(--radius-lg); padding: 40px; border: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); max-width: 800px; margin: 0 auto;">
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-primary); background: linear-gradient(135deg, var(--text-primary) 50%, var(--accent-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Privacy Policy</h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">Last Updated: July 11, 2026</p>
+          
+          <div class="privacy-content" style="display: flex; flex-direction: column; gap: 24px; line-height: 1.7; color: var(--text-secondary);">
+            <div>
+              <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.3rem; margin-bottom: 10px; font-weight: 700;">1. Introduction</h3>
+              <p>Welcome to AuraFinds. We respect your privacy and are committed to protecting any data related to your experience on our website. This Privacy Policy explains our practices regarding user information, local data storage, and affiliate cookies.</p>
+            </div>
+            
+            <div>
+              <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.3rem; margin-bottom: 10px; font-weight: 700;">2. Amazon Affiliate Program & Cookies</h3>
+              <p>AuraFinds is a participant in the Amazon Services LLC Associates Program. When you click on any product recommendation link (e.g. "Buy on Amazon"), you will be redirected to Amazon.in or Amazon.com. This redirect places a tracking cookie on your device to attribute any qualifying referral purchases to our account. These cookies are subject to Amazon's own Privacy Policy.</p>
+            </div>
+            
+            <div>
+              <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.3rem; margin-bottom: 10px; font-weight: 700;">3. No Server-Side Data Collection</h3>
+              <p>We do <strong>not</strong> run back-end databases, sign-up forms, or track your IP address on our servers. We do not collect, sell, or distribute any personally identifiable information (PII) to third parties.</p>
+            </div>
+            
+            <div>
+              <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.3rem; margin-bottom: 10px; font-weight: 700;">4. Local Browser Storage</h3>
+              <p>To enable personal features on this site, we use your browser's <code>localStorage</code> cache. The following data is saved locally on your device and is never transmitted to us:</p>
+              <ul style="padding-left: 20px; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; list-style-type: disc;">
+                <li>Your chosen dark/light theme preference.</li>
+                <li>Your active Wishlist items (product IDs).</li>
+                <li>Temporary catalog data parsed from local sync keys.</li>
+              </ul>
+              <p style="margin-top: 10px;">You can easily clear this information at any time by clearing your browser's site data, cookies, and cache.</p>
+            </div>
+            
+            <div>
+              <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.3rem; margin-bottom: 10px; font-weight: 700;">5. Contact Us</h3>
+              <p>If you have any questions or feedback regarding this website or our privacy practices, please contact us through the Admin portal or reference the public repository guidelines.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Sliding Wishlist Drawer -->
@@ -294,6 +361,8 @@
           <li><a href="#">Catalog</a></li>
           <li><a href="#products-showcase">Featured Deals</a></li>
           <li><a href="#" class="wishlist-trigger">Wishlist</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="admin.html" style="opacity: 0.8;"><i data-lucide="shield-check" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>Admin Portal</a></li>
         </ul>
       </div>
       <div class="footer-compliance">

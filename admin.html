@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraFinds | Admin Product Dashboard</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <span class="logo-accent">Aura</span>Finds <span style="font-size: 0.9rem; font-weight: 500; opacity: 0.6; margin-left: 8px;">Admin</span>
+      </a>
+
+      <!-- Navigation Actions -->
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme Mode">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+        <!-- Sign Out Button -->
+        <button id="btn-sign-out" class="btn btn-outline btn-sm" style="display: none; background-color: rgba(244,63,94,0.06); color: var(--discount-color); border-color: rgba(244,63,94,0.15);">
+          <i data-lucide="log-out"></i> Sign Out
+        </button>
+        <!-- Return back to site -->
+        <a href="index.html" class="btn btn-outline btn-sm">
+          <i data-lucide="external-link"></i> Public Site
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Gate Container -->
+  <div class="container" id="login-container" style="display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 200px); padding: 40px 16px;">
+    <div class="glass" style="width: 100%; max-width: 400px; padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--card-shadow); display: flex; flex-direction: column; gap: 24px;">
+      <div style="text-align: center;">
+        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 2rem; color: var(--text-primary);"><span class="logo-accent">Aura</span>Finds</span>
+        <h4 style="margin-top: 8px; color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Admin Portal Sign In</h4>
+      </div>
+      
+      <form id="login-form" style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" placeholder="Enter username" required>
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Enter password" required>
+        </div>
+        
+        <div id="login-error" style="display: none; color: var(--discount-color); font-size: 0.85rem; align-items: center; gap: 6px; margin-top: 4px;">
+          <i data-lucide="alert-circle" style="width: 16px; height: 16px; flex-shrink: 0;"></i>
+          <span>Invalid username or password.</span>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 44px; margin-top: 8px;">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <main class="container main-content" id="dashboard-content" style="display: none;">
+    <section class="admin-header">
+      <div class="admin-title-area">
+        <h1 class="admin-title">Catalog Dashboard</h1>
+        <p class="admin-subtitle">Add, update, or remove products featured in the affiliate store directory.</p>
+      </div>
+    </section>
+
+    <!-- Stats Panel -->
+    <section class="admin-stats-grid">
+      <div class="stat-card glass">
+        <div class="stat-details">
+          <h3 id="stat-total-products">0</h3>
+          <p>Total Products</p>
+        </div>
+        <div class="stat-icon">
+          <i data-lucide="package"></i>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-details">
+          <h3 id="stat-categories">0</h3>
+          <p>Categories</p>
+        </div>
+        <div class="stat-icon">
+          <i data-lucide="grid"></i>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-details">
+          <h3 id="stat-avg-price">₹0.00</h3>
+          <p>Average Price</p>
+        </div>
+        <div class="stat-icon">
+          <i data-lucide="dollar-sign"></i>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-details">
+          <h3 id="stat-total-reviews">0</h3>
+          <p>Total Ratings</p>
+        </div>
+        <div class="stat-icon">
+          <i data-lucide="star"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Controls Panel -->
+    <section class="admin-controls">
+      <div class="admin-search-filters">
+        <!-- Search bar -->
+        <div class="search-wrapper">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" id="admin-search" placeholder="Search catalog..." aria-label="Search dashboard products">
+          <button id="admin-clear-search" class="clear-btn" aria-label="Clear search" style="display: none;">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <!-- Category Filter -->
+        <select id="filter-category" class="admin-filter-select" aria-label="Filter by category">
+          <option value="all">All Categories</option>
+          <option value="Audio">Audio</option>
+          <option value="Productivity">Productivity</option>
+          <option value="Fitness">Fitness</option>
+          <option value="Smart Home">Smart Home</option>
+        </select>
+      </div>
+      
+      <!-- Primary Action -->
+      <button class="btn btn-primary" id="btn-add-product">
+        <i data-lucide="plus"></i> Add Product
+      </button>
+    </section>
+
+    <!-- Product Database Table -->
+    <section class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Product Details</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-table-body">
+          <!-- Dynamically populated via JS -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- JSON Import/Export Utilities Card -->
+    <section class="utilities-card glass">
+      <div class="utilities-info">
+        <h4>Data Backup & Sync</h4>
+        <p>Export your changes as a JSON configuration. Copy this JSON into <code>products.js</code> to permanently save database changes to the source code.</p>
+      </div>
+      <div class="utilities-actions">
+        <!-- Export JSON -->
+        <button class="btn btn-outline btn-sm" id="btn-export-json">
+          <i data-lucide="download"></i> Export JSON
+        </button>
+        <!-- Import JSON -->
+        <label for="file-import-json" class="btn btn-outline btn-sm" style="margin: 0; cursor: pointer;">
+          <i data-lucide="upload"></i> Import JSON
+        </label>
+        <input type="file" id="file-import-json" accept=".json" style="display: none;">
+        <!-- Reset DB -->
+        <button class="btn btn-outline btn-sm btn-outline-white" id="btn-reset-db" style="background-color: rgba(244,63,94,0.06); color: var(--discount-color); border-color: rgba(244,63,94,0.15);">
+          <i data-lucide="rotate-ccw"></i> Reset Defaults
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Product Edit/Create Modal Overlay -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modal-title"><i data-lucide="package"></i> Add New Product</h3>
+        <button class="icon-btn" id="btn-close-modal" aria-label="Close form panel">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      
+      <form id="product-form">
+        <div class="modal-body">
+          <input type="hidden" id="form-product-id">
+          
+          <div class="form-grid">
+            <!-- Title -->
+            <div class="form-group form-group-full">
+              <label for="form-title">Product Name <span class="required">*</span></label>
+              <input type="text" id="form-title" placeholder="e.g. AuraSound Max ANC" required>
+            </div>
+            
+            <!-- Tagline -->
+            <div class="form-group form-group-full">
+              <label for="form-tagline">Tagline / Catchphrase <span class="required">*</span></label>
+              <input type="text" id="form-tagline" placeholder="e.g. Unrivaled Silence, Exceptional Acoustics" required>
+            </div>
+            
+            <!-- Category -->
+            <div class="form-group">
+              <label for="form-category">Category <span class="required">*</span></label>
+              <select id="form-category" required>
+                <option value="Audio">Audio</option>
+                <option value="Productivity">Productivity</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Smart Home">Smart Home</option>
+              </select>
+            </div>
+            
+            <!-- Rating -->
+            <div class="form-group">
+              <label for="form-rating">Rating Score (1.0 to 5.0) <span class="required">*</span></label>
+              <input type="number" id="form-rating" min="1.0" max="5.0" step="0.1" placeholder="e.g. 4.8" required>
+            </div>
+            
+            <!-- Price -->
+            <div class="form-group">
+              <label for="form-price">Selling Price (₹) <span class="required">*</span></label>
+              <input type="number" id="form-price" min="1" step="1" placeholder="e.g. 29999" required>
+            </div>
+            
+            <!-- Original Price -->
+            <div class="form-group">
+              <label for="form-original-price">Original List Price (₹)</label>
+              <input type="number" id="form-original-price" min="1" step="1" placeholder="e.g. 34999">
+              <p class="field-help">Leave blank if there is no discount deal active.</p>
+            </div>
+
+            <!-- Variants Toggle -->
+            <div class="form-group form-group-full" style="flex-direction: row; align-items: center; gap: 10px; margin-top: 4px;">
+              <input type="checkbox" id="form-has-variants" style="width: 18px; height: 18px; cursor: pointer; margin: 0;">
+              <label for="form-has-variants" style="cursor: pointer; font-size: 0.95rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin: 0;">
+                <i data-lucide="layers" style="width: 16px; height: 16px; color: var(--accent-color);"></i> This product has multiple variants (RAM/Storage/Color options)
+              </label>
+            </div>
+
+            <!-- Variants Section -->
+            <div class="form-group form-group-full" id="variants-section" style="display: none; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <label style="margin: 0;">Variants <span class="required">*</span></label>
+                <button type="button" id="btn-add-variant" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem; gap: 5px;">
+                  <i data-lucide="plus" style="width:14px;height:14px;"></i> Add Variant
+                </button>
+              </div>
+              <div id="variants-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+              <p class="field-help">Each variant has its own name, price, and Amazon link. The base price above is used when no variant is selected.</p>
+            </div>
+            
+            <!-- Image Path -->
+            <div class="form-group form-group-full">
+              <label for="form-image">Product Image URL / Path <span class="required">*</span></label>
+              <input type="text" id="form-image" placeholder="e.g. assets/images/aurasound_max.png" required>
+              <p class="field-help">Relative path in website folders, or a web link.</p>
+            </div>
+            
+            <!-- Amazon URL -->
+            <div class="form-group form-group-full">
+              <label for="form-amazon-url">Amazon Affiliate Link <span class="required">*</span></label>
+              <input type="url" id="form-amazon-url" placeholder="https://www.amazon.com/dp/.../?tag=yourtag" required>
+            </div>
+            
+            <!-- Description -->
+            <div class="form-group form-group-full">
+              <label for="form-description">Product Description <span class="required">*</span></label>
+              <textarea id="form-description" rows="3" placeholder="Write a clean paragraph review..." required></textarea>
+            </div>
+            
+            <!-- Key Features -->
+            <div class="form-group form-group-full">
+              <label for="form-features">Key Features (One feature per line) <span class="required">*</span></label>
+              <textarea id="form-features" rows="4" placeholder="Industry-leading hybrid ANC up to 45dB&#10;Up to 60 hours wireless playback&#10;Custom 40mm drivers" required></textarea>
+            </div>
+            
+            <!-- Specifications -->
+            <div class="form-group form-group-full">
+              <label for="form-specs">Specifications (Format as Label: Value, one per line) <span class="required">*</span></label>
+              <textarea id="form-specs" rows="4" placeholder="Driver Size: 40 mm Dynamic&#10;Bluetooth Version: Bluetooth 5.2&#10;Weight: 250g" required></textarea>
+            </div>
+            
+            <!-- Deal of the Day -->
+            <div class="form-group form-group-full" style="flex-direction: row; align-items: center; gap: 10px; margin-top: 8px;">
+              <input type="checkbox" id="form-deal-of-the-day" style="width: 18px; height: 18px; cursor: pointer; margin: 0;">
+              <label for="form-deal-of-the-day" style="cursor: pointer; font-size: 0.95rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin: 0;">
+                <i data-lucide="sparkles" style="width: 16px; height: 16px; color: var(--discount-color);"></i> Set as Deal of the Day
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="btn-cancel-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Dialog Overlay -->
+  <div class="modal-overlay" id="confirm-modal">
+    <div class="modal-dialog confirm-dialog">
+      <div class="confirm-body">
+        <div class="confirm-icon">
+          <i data-lucide="alert-triangle"></i>
+        </div>
+        <h4 id="confirm-title">Delete Product?</h4>
+        <p>This action cannot be undone. This product will be removed from the local store database.</p>
+      </div>
+      <div class="modal-footer" style="background: none; border-top: none; padding-top: 0; justify-content: center; gap: 16px;">
+        <button class="btn btn-outline" id="btn-cancel-delete">Cancel</button>
+        <button class="btn btn-primary" id="btn-confirm-delete" style="background-color: var(--discount-color); box-shadow: 0 4px 14px rgba(244,63,94,0.3);">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer" style="margin-top: 100px; padding: 40px 0 20px;">
+    <div class="container footer-bottom-container" style="justify-content: center;">
+      <p>&copy; 2026 AuraFinds Admin Console. All data is saved in local browser storage.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="products.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

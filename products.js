@@ -1,177 +1,166 @@
 const products = [
   {
-    id: "aurasound-max",
-    title: "AuraSound Max ANC",
-    tagline: "Unrivaled Silence, Exceptional Acoustics",
-    category: "Audio",
-    price: 349.99,
-    originalPrice: 399.99,
-    rating: 4.8,
-    reviewCount: 1248,
-    image: "assets/images/aurasound_max.png",
-    amazonUrl: "https://www.amazon.com/dp/B08HMWX9ZJ?tag=affiliate-deals-20",
-    features: [
-      "Industry-leading Hybrid Active Noise Cancellation (ANC) up to 45dB",
-      "Custom-designed 40mm dynamic drivers for high-fidelity audio",
-      "Up to 60 hours of continuous wireless playback on a single charge",
-      "Ultra-soft memory foam earcups with premium leather finish",
-      "Multipoint bluetooth: Switch seamlessly between phone and laptop"
-    ],
-    specifications: {
-      "Driver Size": "40 mm Dynamic",
-      "Frequency Response": "4Hz - 40,000Hz",
-      "Bluetooth Version": "Bluetooth 5.2 (LE Audio ready)",
-      "Battery Life": "Up to 60 Hours (ANC Off) / 40 Hours (ANC On)",
-      "Charging": "USB-C Fast Charging (10-min charge = 5 hours play)",
-      "Weight": "250g",
-      "Water Resistance": "IPX4 Sweat Resistant"
-    },
-    description: "Immerse yourself in pure auditory bliss with the AuraSound Max. Engineered for audio purists and daily commuters alike, our flagship over-ear headphones combine state-of-the-art hybrid noise cancellation with custom-tuned acoustic drivers. Whether you are working in a bustling coffee shop or traveling at 30,000 feet, AuraSound Max silences the world so you can focus on what matters: the music."
-  },
-  {
-    id: "novalight-beam",
-    title: "NovaLight Beam Projector",
-    tagline: "Cinematic Home Theater in the Palm of Your Hand",
-    category: "Smart Home",
-    price: 599.99,
-    originalPrice: 699.99,
+    id: "iqoo-z11x",
+    title: "iQOO Z11x 5G",
+    tagline: "7200mAh Massive Battery & Dimensity 7400 Turbo",
+    category: "Productivity",
+    price: 24999,
+    originalPrice: 27999,
     rating: 4.7,
-    reviewCount: 842,
-    image: "assets/images/novalight_beam.png",
-    amazonUrl: "https://www.amazon.com/dp/B09HN5X9ZJ?tag=affiliate-deals-20",
+    reviewCount: 1024,
+    image: "assets/images/iqoo_z11x_black.jpg",
+    amazonUrl: "https://link.amazon/B02PhmY3S",
     features: [
-      "Native 1080p Full HD resolution with 4K UHD support",
-      "Bright 1200 ANSI Lumens for vivid projections even in ambient light",
-      "Smart Auto-Keystone correction and autofocus in under 3 seconds",
-      "Built-in Google TV OS for streaming Netflix, Prime, and Disney+ directly",
-      "Dual 10W Harman Kardon speakers for rich, room-filling sound"
+      "Dimensity 7400 Turbo Processor: Segment-first performance with 1Mn+ AnTuTu score, paired with UFS 3.1 storage.",
+      "Massive 7200mAh Z11x Battery: Packed with 44W FlashCharge support and Bypass gaming charge protection.",
+      "OriginOS 6 (Android 16): Features Circle to Search, AI Transcript Assist, and 4 years of security updates.",
+      "50MP Sony IMX852 AI Camera: Ultra-HD photography with a 32MP front selfie lens and 4K recording support.",
+      "IP68 & IP69+ Durability: Segment-leading dust/waterproof rating alongside certified Military Grade drop-proof builds."
     ],
     specifications: {
-      "Brightness": "1200 ANSI Lumens",
-      "Contrast Ratio": "10,000:1",
-      "Projection Size": "40 to 200 inches",
-      "Light Source": "LED (30,000 hours lifespan)",
-      "OS": "Google TV OS with Play Store access",
-      "Connectivity": "Wi-Fi 6, Bluetooth 5.0, HDMI, USB-C, Aux",
-      "Weight": "1.2 kg"
+      "Brand": "iQOO",
+      "Operating System": "OriginOS 6.0 based on Android 16",
+      "Processor": "MediaTek Dimensity 7400 Turbo (2.6 GHz)",
+      "RAM Memory": "6 GB / 8 GB LPDDR5",
+      "Storage": "128 GB / 256 GB UFS 3.1",
+      "Battery Capacity": "7200 mAh (44W FlashCharge)",
+      "Main Camera": "50 MP Sony IMX 852 (f/1.8, EIS) + 2 MP Depth",
+      "Front Camera": "32 MP Selfie (4K Video Support)",
+      "IP Rating": "IP68 & IP69+ Dust/Water Resistance",
+      "Durability": "Military Grade Shockproof & Drop Resistant"
     },
-    description: "Turn any blank wall into a private cinema with the NovaLight Beam. Combining outstanding 1080p sharpness, high brightness, and Google TV integration, this ultra-portable projector provides endless entertainment anywhere you go. Complete with powerful built-in speakers and smart autofocus, you can set up theater-quality viewings in seconds."
+    description: "Unleash the ultimate power and endurance with the iQOO Z11x 5G. Designed for power-users and gaming enthusiasts alike, this smartphone is driven by the lightning-fast MediaTek Dimensity 7400 Turbo processor, scoring over 1 million on AnTuTu benchmarks. It packs the segment's largest 7200mAh battery, keeping you connected for days with safety-engineered 44W FlashCharge. Outfitted with high-visibility OriginOS 6 powered by Android 16, an ultra-crisp 50MP Sony IMX852 camera, and double-certified IP68/IP69+ military durability, the iQOO Z11x is ready to conquer any challenge.",
+    variants: [
+      { name: "6GB + 128GB", price: 24999, originalPrice: 27999, amazonUrl: "https://link.amazon/B02PhmY3S" },
+      { name: "8GB + 128GB", price: 27999, originalPrice: 30999, amazonUrl: "https://link.amazon/B0bc2UmVi" },
+      { name: "8GB + 256GB", price: 30999, originalPrice: 33999, amazonUrl: "https://link.amazon/B0j1TZY1O" }
+    ],
+    colors: [
+      { name: "Titan Black", image: "assets/images/iqoo_z11x_black.jpg", hex: "#2b2e35" },
+      { name: "Prismatic Green", image: "assets/images/iqoo_z11x_green.jpg", hex: "#c2e7e2" }
+    ]
   },
   {
-    id: "ergodesk-flow",
-    title: "ErgoDesk Flow Standing Desk",
-    tagline: "Work Healthy, Work Smart",
+    id: "iqoo-neo10",
+    title: "iQOO Neo 10 5G",
+    tagline: "India's Slimmest 7000mAh Battery Smartphone with Snapdragon 8s Gen 4",
     category: "Productivity",
-    price: 449.99,
-    originalPrice: 499.99,
-    rating: 4.9,
+    price: 41999,
+    originalPrice: 46999,
+    rating: 4.8,
     reviewCount: 512,
-    image: "assets/images/ergodesk_flow.png",
-    amazonUrl: "https://www.amazon.com/dp/B08FLWX9ZJ?tag=affiliate-deals-20",
+    image: "assets/images/iqoo_neo10_white.jpg",
+    amazonUrl: "https://link.amazon/A0fn3g7W7",
     features: [
-      "Smooth, quiet dual-motor height adjustments (under 45dB)",
-      "Premium solid natural walnut tabletop with rounded safety corners",
-      "Digital controller with 4 programmable memory height presets",
-      "Integrated cable management tray and dual power outlets",
-      "Anti-collision safety sensors detect obstacles and halt movement"
+      "Fastest Smartphone in Segment: Snapdragon 8s Gen 4 (4nm) with 2.51Mn+ AnTuTu score. Self-developed Supercomputing Chip Q1 for ultra-smooth 144FPS gaming.",
+      "India's Slimmest 7000mAh Battery Smartphone: 120W FlashCharge from 1 to 50% in just 19 mins, packed in an ultra-slim 0.809cm lightweight body.",
+      "Segment's Brightest AMOLED Display: 1.5K AMOLED, 144Hz refresh rate, 2000 nits HBM & up to 5500 nits peak brightness for clear sunlight visibility.",
+      "4K 60FPS Front & Rear Camera: 50MP Sony OIS Portrait camera with AI Erase, AI Image Expander, and built-in editing tools.",
+      "OriginOS 6.0 (Android 15): Faster UI with One-Tap Transfer, Office Kit, and Origin Island for seamless Android & iOS connectivity."
     ],
     specifications: {
-      "Height Range": "24.5 to 50.2 inches",
-      "Weight Capacity": "300 lbs (136 kg)",
-      "Tabletop Material": "Solid Natural Walnut Wood",
-      "Frame Material": "Heavy-duty Industrial Steel",
-      "Adjustment Speed": "1.5 inches per second",
-      "Desktop Dimensions": "55\" x 28\" x 0.75\"",
-      "Warranty": "5-Year Frame & Motor Warranty"
+      "Brand": "iQOO",
+      "Operating System": "Funtouch OS 15 / OriginOS 6.0 (Android 15)",
+      "Processor": "Snapdragon 8s Gen 4 (4nm, 3.21 GHz)",
+      "RAM Memory": "12 GB LPDDR5X",
+      "Storage": "256 GB / 512 GB UFS 4.0",
+      "Display": "1.5K AMOLED, 144Hz, 5500 nits Peak Brightness",
+      "Battery Capacity": "7000 mAh (120W FlashCharge)",
+      "Main Camera": "50 MP Sony OIS Portrait (4K 60FPS)",
+      "Front Camera": "4K 60FPS Selfie Camera",
+      "Thickness": "Ultra-Slim 0.809 cm"
     },
-    description: "Elevate your productivity and health with the ErgoDesk Flow. Crafted from high-grade natural walnut and supported by an industrial-strength dual-motor steel frame, this height-adjustable desk transitions smoothly and silently from sitting to standing. It is the perfect centerpiece for a clean, ergonomic, and inspiring workstation."
-  },
-  {
-    id: "chronos-fit",
-    title: "Chronos Fit v2 Smartwatch",
-    tagline: "Timeless Design Meets Elite Health Tracking",
-    category: "Fitness",
-    price: 199.99,
-    originalPrice: 249.99,
-    rating: 4.6,
-    reviewCount: 2154,
-    image: "assets/images/chronos_fit.png",
-    amazonUrl: "https://www.amazon.com/dp/B09DMWX9ZJ?tag=affiliate-deals-20",
-    features: [
-      "1.43\" Always-On Curved AMOLED display with scratch-resistant glass",
-      "Advanced 24/7 heart rate, SpO2, sleep stages, and stress level monitoring",
-      "Over 120 professional workout modes with automatic exercise detection",
-      "Built-in multi-system GPS for accurate path tracking without your phone",
-      "Incredible 14-day battery life on a single charge under standard use"
+    description: "Meet the iQOO Neo 10 — India's slimmest 7000mAh battery smartphone, engineered to redefine performance and endurance. Powered by the blazing Snapdragon 8s Gen 4 chip with the proprietary Q1 gaming processor, it delivers an AnTuTu score of 2.51 million and segment-leading 144FPS stability for demanding titles. The 1.5K AMOLED display shines brilliantly at up to 5500 nits peak brightness, while the 120W FlashCharge gets you from 1% to 50% in just 19 minutes. Capture every moment in stunning clarity with the 50MP Sony OIS camera offering 4K 60FPS front and rear recording, enhanced by AI tools. All of this in an impossibly slim 0.809cm chassis running OriginOS 6.0 for a connected, seamless daily experience.",
+    variants: [
+      { name: "8GB + 256GB", price: 41999, originalPrice: 46999, amazonUrl: "https://link.amazon/A0fn3g7W7" },
+      { name: "12GB + 256GB", price: 46999, originalPrice: 51999, amazonUrl: "https://link.amazon/A0hD0xD3o" }
     ],
-    specifications: {
-      "Display": "1.43\" Curved AMOLED (466x466 px, 326 PPI)",
-      "Body Material": "Aerospace-grade Titanium Alloy",
-      "Sensors": "Optical Heart Rate, SpO2, Accelerometer, Gyroscope, Barometer",
-      "Waterproofing": "5 ATM (up to 50 meters depth)",
-      "Battery": "450mAh (Up to 14 days normal, 7 days heavy)",
-      "Compatibility": "iOS 12.0+ and Android 8.0+",
-      "Strap Width": "22mm Quick Release"
-    },
-    description: "Balance style and fitness with the Chronos Fit v2. Designed with an elegant titanium alloy chassis and a gorgeous AMOLED screen, this smartwatch keeps pace with both your formal board meetings and your intense weekend runs. Monitor your vitals, track your coordinates, and stay connected with notifications that last for two full weeks."
+    colors: [
+      { name: "Marble White", image: "assets/images/iqoo_neo10_white.jpg", hex: "#e8e8e8" },
+      { name: "Graphite Black", image: "assets/images/iqoo_neo10_black.jpg", hex: "#2d2d2d" }
+    ]
   },
   {
-    id: "keyquest-pro",
-    title: "KeyQuest Pro Mechanical Keyboard",
-    tagline: "The Ultimate Tactile Typing Experience",
+    id: "iqoo-15r",
+    title: "iQOO 15R 5G",
+    tagline: "Snapdragon 8 Gen 5 · 7600mAh · 144Hz AMOLED · India's Slimmest Flagship",
     category: "Productivity",
-    price: 169.99,
-    originalPrice: 189.99,
-    rating: 4.9,
-    reviewCount: 389,
-    image: "assets/images/keyquest_pro.png",
-    amazonUrl: "https://www.amazon.com/dp/B08HMWX5ZJ?tag=affiliate-deals-20",
+    price: 49999,
+    originalPrice: 54999,
+    rating: 4.8,
+    reviewCount: 256,
+    image: "assets/images/iqoo_15r_blue.jpg",
+    amazonUrl: "https://link.amazon/A0eYxJ4q2",
     features: [
-      "Compact 75% layout maximizes desk space for mouse movement",
-      "Hot-swappable sockets support 3-pin and 5-pin MX switches",
-      "Pre-lubed linear red switches for buttery smooth, quiet keystrokes",
-      "Three-mode connectivity: 2.4Ghz wireless, Bluetooth 5.1, and USB-C",
-      "Premium double-shot PBT keycaps with dye-sublimated legends"
+      "Fastest in Segment: Snapdragon 8 Gen 5 (3nm TSMC) with 3.5Mn+ AnTuTu, LPDDR5X Ultra RAM & UFS 4.1 storage for ultimate flagship speed.",
+      "India's Slimmest 7600mAh Battery Smartphone: 0.790cm ultra-slim body with 100W FlashCharge (20→44% in 10 mins) and Bypass Charging 2.0.",
+      "Segment's Most Stable 144FPS Gaming: Supercomputing Chip Q2 with 1.5K Super Resolution, 144FPS frame interpolation & 6.5K IceCore VC Cooling.",
+      "50MP Sony LYT-700V OIS Camera: AI Magic Move, AI Image Expander, AI Four Seasons — IP68 & IP69 dust/water resistance.",
+      "OriginOS 6.0 (Android 16): 4 years OS + 6 years security updates. Origin Island, Office Kit, One-Tap Transfer & Android-iOS connectivity."
     ],
     specifications: {
-      "Form Factor": "75% (84 Keys)",
-      "Mounting Style": "Gasket Mounted",
-      "Switch Type": "Pre-lubed Custom Linear Red Switches",
-      "Battery Capacity": "4000mAh (Up to 200 hours without RGB)",
-      "Backlighting": "16.8 Million Color Per-Key RGB",
-      "Frame Material": "CNC Anodized Aluminum",
-      "Stabilizers": "Screw-in PCB Stabilizers (Lubed)"
+      "Brand": "iQOO",
+      "Operating System": "OriginOS 6.0 based on Android 16",
+      "Processor": "Snapdragon 8 Gen 5 (3nm, 3.8 GHz)",
+      "RAM Memory": "8 GB / 12 GB LPDDR5X Ultra",
+      "Storage": "256 GB / 512 GB UFS 4.1",
+      "Display": "1.5K 144Hz AMOLED, 5000 nits Local Peak",
+      "Battery Capacity": "7600 mAh (100W FlashCharge)",
+      "Main Camera": "50 MP Sony LYT-700V OIS (AI Enhanced)",
+      "IP Rating": "IP68 & IP69 Dust/Water Resistance",
+      "Thickness": "Ultra-Slim 0.790 cm",
+      "Gaming Chip": "Supercomputing Chip Q2 + Dedicated Network Chip"
     },
-    description: "Rediscover the joy of typing with the KeyQuest Pro. Built on a gasket-mounted structure and encased in premium CNC aluminum, this mechanical keyboard offers unmatched acoustic resonance and structural comfort. With pre-lubed switches and hot-swappable convenience, it is a keyboard enthusiast's dream, ready to boost your typing speed and gaming response."
+    description: "The iQOO 15R 5G is the ultimate flagship-performance smartphone built for power users and gamers. Driven by the Snapdragon 8 Gen 5 on TSMC's 3nm process, it smashes through benchmarks with a 3.5 million AnTuTu score. The Supercomputing Chip Q2 delivers simultaneous 1.5K Super Resolution and rock-solid 144FPS gaming, cooled by a 6.5K IceCore VC system. Despite packing a massive 7600mAh battery with 100W FlashCharge, it remains India's slimmest at just 0.790cm. The 1.5K AMOLED display blazes at 5000 nits local peak brightness and 144Hz, while the 50MP Sony LYT-700V OIS camera captures stunning shots enhanced by cutting-edge AI. Running OriginOS 6.0 with 4 years of OS updates and IP68/IP69 durability, the 15R is built to last.",
+    variants: [
+      { name: "8GB + 256GB",  price: 49999, originalPrice: 54999, amazonUrl: "https://link.amazon/A0eYxJ4q2" },
+      { name: "12GB + 256GB", price: 54999, originalPrice: 59999, amazonUrl: "https://link.amazon/A097L3pIJ" },
+      { name: "12GB + 512GB", price: 61999, originalPrice: 66999, amazonUrl: "https://link.amazon/A0baNRnhb" }
+    ],
+    colors: [
+      { name: "Pixel Blue",     image: "assets/images/iqoo_15r_blue.jpg",  hex: "#adc8e0" },
+      { name: "Graphite Black", image: "assets/images/iqoo_15r_black.jpg", hex: "#3a3a3a" }
+    ]
   },
   {
-    id: "hydrostream-go",
-    title: "HydroStream Go Smart Bottle",
-    tagline: "Hydration Tracking for the Modern Explorer",
-    category: "Fitness",
-    price: 49.99,
-    originalPrice: 59.99,
+    id: "lenovo-ideapad-slim3",
+    title: "Lenovo IdeaPad Slim 3 15",
+    tagline: "13th Gen Intel Core i3 · 15.6\" FHD Anti-Glare · 1.6kg Ultra Thin & Light",
+    category: "Productivity",
+    price: 46390,
+    originalPrice: 56890,
     rating: 4.5,
-    reviewCount: 618,
-    image: "assets/images/hydrostream_go.png",
-    amazonUrl: "https://www.amazon.com/dp/B09BMWX9ZJ?tag=affiliate-deals-20",
+    reviewCount: 184,
+    image: "assets/images/lenovo_slim3_1.jpg",
+    amazonUrl: "https://link.amazon/B0i7yNgv1",
     features: [
-      "Double-walled vacuum insulation keeps drinks cold for 24h, hot for 12h",
-      "Smart touch LED cap displays current temperature with a tap",
-      "Periodic glowing alert ring reminds you to take a sip every hour",
-      "Built-in UV-C water purification sanitizes cap and bottle in 60s",
-      "Eco-friendly, BPA-free premium food-grade 18/8 stainless steel"
+      "13th Gen Intel Core i3-1315U Processor: 6 Cores (2 P-cores + 4 E-cores) and 8 Threads, with P-core up to 4.5GHz and 10MB Smart Cache.",
+      "15.6\" FHD Anti-Glare Display: Clear 1920x1080 resolution, 250 nits brightness, and TUV Low Blue Light certified for eye protection.",
+      "Fast Memory & Storage: Preloaded with 8GB high-speed LPDDR5-4800 RAM and 512GB PCIe Gen 4 SSD (expandable up to 1TB).",
+      "Sleek & Lightweight Design: Ultra-thin profile of 1.79cm and only 1.6kg light weight, featuring a 4-side narrow bezel screen.",
+      "Pre-installed OS & Office: Out-of-the-box Windows 11 Home, Microsoft Office Home 2024, and 3-month Xbox Game Pass subscription."
     ],
     specifications: {
-      "Volume Capacity": "20 oz (600 ml)",
-      "Material": "18/8 Premium Stainless Steel",
-      "Battery Life": "Up to 30 days on a magnetic charge",
-      "Sterilization": "280nm UV-C LED (99.99% sterilization)",
-      "Weight": "350g (Empty)",
-      "Leak Protection": "Leak-proof silicon seal ring",
-      "Color Options": "Deep Ocean Blue, Matte Black, Alpine White"
+      "Brand": "Lenovo",
+      "Model Number": "82X700HMIN",
+      "Processor": "Intel Core i3-1315U (6 Cores, 8 Threads, up to 4.5 GHz)",
+      "RAM Memory": "8 GB LPDDR5-4800 (Soldered)",
+      "Storage": "512 GB PCIe x4 SSD (Expandable up to 1TB)",
+      "Display": "15.6\" FHD (1920x1080) Anti-Glare, 250 nits",
+      "Operating System": "Windows 11 Home",
+      "Office Suite": "Microsoft Office Home 2024",
+      "Graphics": "Intel UHD Graphics (Shared)",
+      "Color": "Arctic Grey",
+      "Weight": "1.62 Kg (1620 Grams)",
+      "Special Features": "Anti-Glare Coating, HD Audio, Memory Card Slot, FHD 1080p Webcam",
+      "Warranty": "1 Year On-Site + 1 Year ADP Free",
+      "Dimensions": "35.9L x 23.5W x 1.8Th Centimeters"
     },
-    description: "Stay healthy, pure, and hydrated with the HydroStream Go. This smart water bottle does more than keep your drinks at the perfect temperature; it sanitizes your water using cutting-edge UV-C light and vibrates to remind you to drink. Made from food-grade stainless steel, it is the ultimate companion for travel, gym, or office."
+    description: "Designed for students, business professionals, and personal daily use, the Lenovo IdeaPad Slim 3 is a powerful, thin, and light laptop that goes wherever you go. Powered by the 13th Gen Intel Core i3-1315U processor with 6 cores and 8 threads, it delivers snappy multi-tasking alongside energy efficiency. The 15.6\" FHD anti-glare screen with TUV low blue light certification protects your eyes during long study or work sessions. Outfitted with 8GB high-speed LPDDR5 memory, a 512GB SSD, Windows 11 Home, and Office Home 2024 pre-installed, this Arctic Grey companion is ready to boost your productivity out of the box.",
+    colors: [
+      { name: "Arctic Grey", image: "assets/images/lenovo_slim3_1.jpg", hex: "#8e9196" },
+      { name: "Inside View", image: "assets/images/lenovo_slim3_2.jpg", hex: "#5c5e62" }
+    ]
   }
 ];
 
