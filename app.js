@@ -257,7 +257,8 @@ function initDealPopup() {
       }
     });
 
-    // Trigger Popup after 10 seconds (10000 ms)
+    // Trigger Popup after 10 seconds (10000 ms) - Disabled by request
+    /*
     setTimeout(() => {
       // Only show if the user hasn't already navigated to a specific product or admin view, to preserve UX
       const currentHash = window.location.hash;
@@ -265,6 +266,7 @@ function initDealPopup() {
         dom.dealPopupOverlay.style.display = "flex";
       }
     }, 10000);
+    */
   }
 }
 
