@@ -33,6 +33,45 @@ const products = [
     colors: [
       { name: "Standard Blue/White", image: "assets/images/c_cure_razor.jpg", hex: "#0055ff" }
     ]
+  },
+  {
+    id: "1002",
+    title: "Fitelo Smart BMI Weight Scale",
+    tagline: "Track 25+ Body Parameters, Body Fat & Muscle Mass | 100+ User Profiles | 2 Yr Warranty | Large Foot Area | Free App Sync & Health Report Card | For Home & Gym Fitness",
+    category: "Fitness",
+    price: 998,
+    originalPrice: 4999,
+    rating: 4.6,
+    reviewCount: 1820,
+    image: "assets/images/fitelo_scale.jpg",
+    amazonUrl: "https://link.amazon/B0dD9iVcz",
+    features: [
+      "25+ BODY COMPOSITION METRICS IN ONE STEP: Track weight, body fat %, BMI, muscle mass, visceral fat, bone mass & more - get a complete view of your health, not just your weight.",
+      "DUAL-FREQUENCY BIA FOR SUPERIOR ACCURACY: Advanced bioelectrical impedance technology uses a safe, low-level current to measure fat, muscle & water - delivering precise and consistent results every time.",
+      "AI-POWERED INSIGHTS FOR BETTER DECISIONS: Get personalized guidance on your body metrics with an in-app AI assistant that helps you understand and improve your results.",
+      "4 HIGH-PRECISION SENSORS FOR RELIABLE READINGS: Built with sensitive electrodes and advanced sensors to ensure accurate measurements, far beyond basic weighing scales.",
+      "INSTANT STEP-ON TECHNOLOGY WITH AUTO ON/OFF: No tapping needed—just step on for instant readings. Energy-efficient design ensures hassle-free daily use.",
+      "SMART APP SYNC WITH REAL-TIME TRACKING: Seamlessly connect via Bluetooth to the Fitelo app (Android & iOS) to monitor trends, set goals & track your transformation.",
+      "UNLOCK PREMIUM APP FEATURES (FREE): Enjoy unlimited meal logs, smart food swaps, step challenges & advanced tracking tools - without any extra subscription.",
+      "UNLIMITED USER PROFILES (FAMILY FRIENDLY): Create multiple profiles for every family member and track individual progress with personalized data in one app."
+    ],
+    specifications: {
+      "Brand": "Fitelo",
+      "Special Feature": "25+ Body Composition Metrics, Dual-Frequency BIA, AI-Powered Insights, Unlimited User Profiles, Bluetooth App Sync",
+      "Measurement Parameters": "Weight, BMI, Body Fat %, Muscle Mass, Visceral Fat, Bone Mass, Body Water, etc.",
+      "Connectivity": "Bluetooth (Android & iOS app sync)",
+      "Sensors": "4 High-Precision Electrodes",
+      "Display": "LED Backlit Display",
+      "Warranty": "2 Years Warranty",
+      "Power Source": "Batteries (Auto On/Off Step-On)"
+    },
+    description: "25+ BODY COMPOSITION METRICS IN ONE STEP: Track weight, body fat %, BMI, muscle mass, visceral fat, bone mass & more - get a complete view of your health, not just your weight. DUAL-FREQUENCY BIA FOR SUPERIOR ACCURACY: Advanced bioelectrical impedance technology uses a safe, low-level current to measure fat, muscle & water - delivering precise and consistent results every time. AI-POWERED INSIGHTS FOR BETTER DECISIONS: Get personalized guidance on your body metrics with an in-app AI assistant that helps you understand and improve your results. 4 HIGH-PRECISION SENSORS FOR RELIABLE READINGS: Built with sensitive electrodes and advanced sensors to ensure accurate measurements, far beyond basic weighing scales. INSTANT STEP-ON TECHNOLOGY WITH AUTO ON/OFF: No tapping needed—just step on for instant readings. Energy-efficient design ensures hassle-free daily use. SMART APP SYNC WITH REAL-TIME TRACKING: Seamlessly connect via Bluetooth to the Fitelo app (Android & iOS) to monitor trends, set goals & track your transformation. UNLOCK PREMIUM APP FEATURES (FREE): Enjoy unlimited meal logs, smart food swaps, step challenges & advanced tracking tools - without any extra subscription. UNLIMITED USER PROFILES (FAMILY FRIENDLY): Create multiple profiles for every family member and track individual progress with personalized data in one app.",
+    variants: [
+      { name: "Fitelo Smart Scale", price: 998, originalPrice: 4999, amazonUrl: "https://link.amazon/B0dD9iVcz" }
+    ],
+    colors: [
+      { name: "Obsidian Black", image: "assets/images/fitelo_scale.jpg", hex: "#111111" }
+    ]
   }
 ];
 
