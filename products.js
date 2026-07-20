@@ -1,7 +1,7 @@
 const products = [
   {
     id: "1001",
-    title: "C-Cure Disposable Surgical Skin Razor (Pack of 3)",
+    title: "Disposable Razor For Men Pack of 3 | Surgical Skin Blade Use And Throw Shaving Razor With Safety Cap | Manual Beard And Face Grooming | Travel Friendly Stainless Steel Blade | ISO, CE Approved",
     tagline: "Disposable Razor For Men Pack of 3 | Surgical Skin Blade Use And Throw Shaving Razor With Safety Cap",
     category: "Fitness",
     price: 299,
