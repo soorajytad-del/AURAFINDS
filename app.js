@@ -354,6 +354,11 @@ function showProductDetailsPage(product) {
     detailCodeBadge.textContent = `ID: ${product.id}`;
   }
   
+  const priceDisclaimerDate = document.getElementById("price-disclaimer-date");
+  if (priceDisclaimerDate) {
+    priceDisclaimerDate.textContent = getFormattedDisclaimerDate();
+  }
+  
   // Colors Selector
   if (product.colors && product.colors.length > 0) {
     dom.detailColorsContainer.style.display = "block";
@@ -855,6 +860,16 @@ function setupEventListeners() {
 function applyTheme(theme) {
   dom.html.setAttribute("data-theme", theme);
   localStorage.setItem("aurafinds_theme", theme);
+}
+
+function getFormattedDisclaimerDate() {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+  return `${dateStr} 12:00 PM IST`;
 }
 
 function resetAllFilters() {

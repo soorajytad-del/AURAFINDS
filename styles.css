@@ -1271,6 +1271,27 @@ h2 {
   color: var(--price-color);
 }
 
+.price-disclaimer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.price-disclaimer p {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.price-disclaimer svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-light);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 /* Detail Info Sections */
 .detail-section {
   margin-bottom: 36px;
