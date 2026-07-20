@@ -5,7 +5,7 @@ const products = [
     tagline: "Disposable Razor For Men Pack of 3 | Surgical Skin Blade Use And Throw Shaving Razor With Safety Cap",
     category: "Fitness",
     price: 299,
-    originalPrice: 399,
+    originalPrice: 499,
     rating: 4.3,
     reviewCount: 350,
     image: "assets/images/c_cure_razor.jpg",
@@ -28,7 +28,7 @@ const products = [
     },
     description: "The C-Cure Disposable Surgical Skin Razor is a premium grooming and skin-preparation tool, now available in a handy pack of 3. Manufactured under strict ISO and CE guidelines, these razors feature surgical-grade stainless steel single-edge blades coated with Teflon and Platinum for an exceptionally close, smooth shave without pulling or irritating sensitive skin. Perfect for travel, beard lining, and quick face grooming, each razor includes a secure safety cap. Its lightweight build and ribbed handle offer precise control, making it an excellent utility choice for both medical clinics and home grooming routines.",
     variants: [
-      { name: "Pack of 3", price: 299, originalPrice: 399, amazonUrl: "https://link.amazon/B08ATGBYM" }
+      { name: "Pack of 3", price: 299, originalPrice: 499, amazonUrl: "https://link.amazon/B08ATGBYM" }
     ],
     colors: [
       { name: "Standard Blue/White", image: "assets/images/c_cure_razor.jpg", hex: "#0055ff" }
