@@ -616,6 +616,44 @@ const products = [
     colors: [
       { name: "White Cylinder", image: "https://m.media-amazon.com/images/I/51SswG1L88L._SL1500_.jpg", hex: "#ffffff" }
     ]
+  },
+  {
+    id: "1017",
+    title: "Amazon Brand - Solimo Electroplated Frame Bumper Case",
+    tagline: "Apple iPhone X / XS · Luxury Gold-Finish Border · Ultra-Clear Soft TPU Back",
+    category: "Productivity",
+    price: 299,
+    originalPrice: 999,
+    rating: 4.2,
+    reviewCount: 1450,
+    image: "https://m.media-amazon.com/images/I/71rM2Yw5wzL._SL1500_.jpg",
+    amazonUrl: "https://link.amazon/B08ATGBYM",
+    features: [
+      "Luxury Gold Electroplated Border: A premium polished gold-colored frame border that highlights the curves of your iPhone X/XS.",
+      "Ultra Crystal Clear Back: Constructed of high-grade, anti-yellowing flexible TPU material that displays the original device color.",
+      "Dual-Material Hybrid Armor: Flexible silicone bumpers combined with a semi-hard clear shell provide daily scratch and drop protection.",
+      "Raised Screen & Lens Lips: Raised bezels around the camera module (0.8mm) and front screen (1.0mm) prevent surface contact scratches.",
+      "Tactile Click Buttons: Precisely molded buttons and speaker cutouts offer comfortable press feedback and zero charging port blocking."
+    ],
+    specifications: {
+      "Brand": "Amazon Brand - Solimo",
+      "Compatible Devices": "Apple iPhone X / Apple iPhone Xs",
+      "Material": "Thermoplastic Polyurethane (TPU), Polycarbonate (PC)",
+      "Color": "Gold",
+      "Bumper Finish": "Metallic Electroplating",
+      "Form Factor": "Slim Profile Back Cover",
+      "Special Features": "Anti-Yellowing, Shock-Absorbent, Scratch-Resistant",
+      "Item Weight": "22 Grams",
+      "Dimensions": "14.5 x 7.2 x 0.9 Centimeters"
+    },
+    description: "Give your Apple iPhone X or iPhone Xs a stylish upgrade while protecting it from drops with the Solimo Electroplated Frame Bumper Clear Case. Specifically designed with precise measurements, this cover has a high-shine, gold-electroplated bumper boundary that mimics the luxury metallic aesthetics of Apple's flagship materials. The backplate features crystal clear, anti-yellowing soft TPU rubber, allowing you to showcase the native design of your glass back. Equipped with smart shock cushions and raised lens borders, it guards your phone against minor drops and tableside abrasions without adding unnecessary bulk.",
+    variants: [
+      { name: "iPhone X/XS Case", price: 299, originalPrice: 999, amazonUrl: "https://link.amazon/B08ATGBYM" }
+    ],
+    colors: [
+      { name: "Luxury Gold", image: "https://m.media-amazon.com/images/I/71rM2Yw5wzL._SL1500_.jpg", hex: "#d4af37" },
+      { name: "Sleek Silver", image: "https://m.media-amazon.com/images/I/719hE3hR2OL._SL1500_.jpg", hex: "#e5e7eb" }
+    ]
   }
 ];
 
