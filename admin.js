@@ -38,9 +38,9 @@ const activeLocalIds = localProducts.map(p => p.id);
   }
 });
 
-// 3. Validate and clean active Deal of the Day (Force Lenovo Laptop '1004' as default)
-localStorage.setItem("aurafinds_deal_of_the_day", "1004");
-const activeDealId = "1004";
+// 3. Validate and clean active Deal of the Day (Force C-Cure Razor '1001' as default)
+localStorage.setItem("aurafinds_deal_of_the_day", "1001");
+const activeDealId = "1001";
 
 // 4. Save the synced state back to localStorage
 localStorage.setItem("aurafinds_products", JSON.stringify(localProducts));
@@ -308,7 +308,7 @@ function renderTable() {
     return;
   }
 
-  const dealOfTheDayId = localStorage.getItem("aurafinds_deal_of_the_day") || "1004";
+  const dealOfTheDayId = localStorage.getItem("aurafinds_deal_of_the_day") || "1001";
 
   dom.adminTableBody.innerHTML = filtered.map(product => `
     <tr>
@@ -407,7 +407,7 @@ window.openEditModal = function(productId) {
     .join("\n");
     
   // Deal of the day state
-  const dealOfTheDayId = localStorage.getItem("aurafinds_deal_of_the_day") || "1004";
+  const dealOfTheDayId = localStorage.getItem("aurafinds_deal_of_the_day") || "1001";
   dom.formDealOfTheDay.checked = dealOfTheDayId === productId;
   
   // Variants
@@ -521,7 +521,7 @@ function handleFormSubmit(e) {
   if (dom.formDealOfTheDay.checked) {
     localStorage.setItem("aurafinds_deal_of_the_day", productID);
   } else if (localStorage.getItem("aurafinds_deal_of_the_day") === productID) {
-    localStorage.setItem("aurafinds_deal_of_the_day", "1004");
+    localStorage.setItem("aurafinds_deal_of_the_day", "1001");
   }
 
   // Save State

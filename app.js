@@ -58,9 +58,9 @@ const activeLocalIds = localProducts.map(p => p.id);
   }
 });
 
-// 3. Validate and clean active Deal of the Day (Hardcode Lenovo Laptop '1004' as default)
-localStorage.setItem("aurafinds_deal_of_the_day", "1004");
-const activeDealId = "1004";
+// 3. Validate and clean active Deal of the Day (Hardcode C-Cure Razor '1001' as default)
+localStorage.setItem("aurafinds_deal_of_the_day", "1001");
+const activeDealId = "1001";
 
 // 4. Save the synced state back to localStorage
 localStorage.setItem("aurafinds_products", JSON.stringify(localProducts));
@@ -166,7 +166,7 @@ function init() {
 }
 
 function updateHeroDeal() {
-  const dealId = localStorage.getItem("aurafinds_deal_of_the_day") || "1004";
+  const dealId = localStorage.getItem("aurafinds_deal_of_the_day") || "1001";
   const dealProduct = state.products.find(p => p.id === dealId);
   const heroVisual = document.querySelector(".hero-visual");
   const heroContainer = document.querySelector(".hero-container");
@@ -205,7 +205,7 @@ function updateHeroDeal() {
 }
 
 function initDealPopup() {
-  const dealId = localStorage.getItem("aurafinds_deal_of_the_day") || "1004";
+  const dealId = localStorage.getItem("aurafinds_deal_of_the_day") || "1001";
   const dealProduct = state.products.find(p => p.id === dealId);
   
   if (dealProduct && dom.dealPopupOverlay) {
